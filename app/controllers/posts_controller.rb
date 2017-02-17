@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
 
@@ -38,14 +39,15 @@ class PostsController < ApplicationController
     @post.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  private :set_post
 
-    # Only allow a trusted parameter "white list" through.
-    def post_params
-      params.require(:post).permit(:animal_type)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def post_params
+    params.require(:post).permit(:animal_type, :date_seen, :location, :description)
+  end
+  private :post_params
 end

@@ -9,7 +9,10 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
     "post": {
-      "animal_type": "'"${ANIMALTYPE}"'"
+      "animal_type": "'"${ANIMALTYPE}"'",
+      "date_seen": "'"${DATESEEN}"'",
+      "location": "'"${LOCATION}"'",
+      "description": "'"${DESCRIPTION}"'"
     }
   }'
 
