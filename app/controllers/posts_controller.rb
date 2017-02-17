@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class PostsController < ApplicationController
+class PostsController < OpenReadController
   before_action :set_post, only: [:show, :update, :destroy]
 
   # GET /posts
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     if @post.save
       render json: @post, status: :created
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      render json: @post
+      head :no_content
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
   private :set_post
 
